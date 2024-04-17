@@ -89,6 +89,10 @@
             }
 
             firstItem = false;
+          } else if (/^={3,}$/.test(line)) {
+            html += "<hr />\n\n";
+          } else if (/^-{3,}$/.test(line)) {
+            html += "<hr />\n\n";
           } else if (line.startsWith("![")) {
             const altTextStartIndex = line.indexOf("[") + 1;
             const altTextEndIndex = line.indexOf("]");
@@ -102,7 +106,7 @@
             const linkTextEndIndex = line.indexOf("]");
             const linkText = line.substring(
               linkTextStartIndex,
-              linkTextEndIndex
+              linkTextEndIndex,
             );
             const urlStartIndex = line.indexOf("](") + 2;
             const urlEndIndex = line.indexOf(")");
@@ -201,7 +205,7 @@
         fs.writeFileSync(outputPath, templateHtml, "utf-8");
 
         console.log(
-          `HTML file "${outputFileName}" generated successfully at ${outputPath}!`
+          `HTML file "${outputFileName}" generated successfully at ${outputPath}!`,
         );
       } catch (error) {
         throw new Error("Error generating HTML file: " + error.message);
